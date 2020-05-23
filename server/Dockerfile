@@ -16,4 +16,8 @@ RUN npm install
 COPY . /app
 
 EXPOSE 5000
+
+HEALTHCHECK --interval=30s --timeout=30s --start-period=1s --retries=3 \
+  CMD curl -f http://0.0.0.0:5000 || exit 1
+
 CMD [ "node", "index.js" ]
